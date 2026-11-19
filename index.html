@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECO-AWARE • Badges</title>
+  <link rel="icon" type="image/png" href="emblem.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Animated Ambient Body Background -->
+  <div class="ambient-mesh"></div>
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
+  <!-- Animated Floating Particle Dots (Leaf Green, Fire Red, Snow White) -->
+  <div class="dot dot-g1"></div>
+  <div class="dot dot-g2"></div>
+  <div class="dot dot-r1"></div>
+  <div class="dot dot-r2"></div>
+  <div class="dot dot-w1"></div>
+  <div class="dot dot-w2"></div>
+
+  <!-- Header with 3-Dots Button (Exclusive Access to Host Mode) -->
+  <header class="app-header">
+    <button class="top-menu-btn" type="button" aria-label="Mode Hôte" id="menu-btn" title="Mode Hôte">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="5" r="2.2"/>
+        <circle cx="12" cy="12" r="2.2"/>
+        <circle cx="12" cy="19" r="2.2"/>
+      </svg>
+    </button>
+
+    <div class="logo-glow"></div>
+    <div class="brand-emblem-wrap">
+      <img src="emblem.png" alt="ECO-AWARE Logo" class="brand-emblem-img">
+    </div>
+    <h1 class="brand-title">
+      <span class="brand-white">ECO-</span><span class="brand-green">AWARE</span>
+    </h1>
+  </header>
+
+  <!-- Main Section: Formulaire de Création de Badge pour les Participants -->
+  <main>
+    <!-- Formulaire de création de badge avec bordure lumineuse tournante -->
+    <section class="panel" id="panel-form">
+      <div class="panel-inner">
+        <h2>Créer un badge</h2>
+
+        <form id="form" novalidate>
+          <div class="form-group">
+            <div class="label-row">
+              <label for="name">Nom complet du membre</label>
+              <span class="required-star">*</span>
+            </div>
+            <div class="input-wrap field-enhanced">
+              <span class="field-icon-left">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </span>
+              <input id="name" name="name" type="text" placeholder="Exemple : Labidien Djamel" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="department">Département</label>
+              <span class="required-star">*</span>
+            </div>
+            <div class="input-wrap field-enhanced">
+              <span class="field-icon-left">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                </svg>
+              </span>
+              <select id="department" name="department" required>
+                <option value="IT" selected>IT</option>
+                <option value="RE">RE</option>
+                <option value="RH">RH</option>
+                <option value="ORGANISATION">ORGANISATION</option>
+                <option value="COMMUNICATION">COMMUNICATION</option>
+              </select>
+              <span class="select-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <p id="error" role="alert" hidden></p>
+          <button type="submit" id="submit">
+            <span>Créer le badge</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Message de confirmation : Inscription validée (Remplace le formulaire après création) -->
+    <section class="panel panel-confirmation" id="result" hidden>
+      <div class="panel-inner">
+        <div class="validation-success-card">
+          
+          <div class="validation-icon-circle-large">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          
+          <h2 class="validation-title-large">Votre inscription a été validée !</h2>
+          <p class="validation-desc-large" id="validation-desc">
+            Félicitations, votre inscription a été validée avec succès.
+          </p>
+
+          <div class="validation-details-box">
+            <div class="val-detail-row">
+              <span class="val-label">Nom complet du membre</span>
+              <span class="val-value" id="val-member-name">-</span>
+            </div>
+            <div class="val-detail-row">
+              <span class="val-label">Département</span>
+              <span class="val-value val-badge-dept" id="val-member-dept">-</span>
+            </div>
+            <div class="val-detail-row">
+              <span class="val-label">Statut</span>
+              <span class="val-value val-status">
+                <span class="status-dot"></span> Validée &amp; Enregistrée
+              </span>
+            </div>
+          </div>
+
+          <div class="validation-actions">
+            <button type="button" class="btn-new-badge" id="btn-create-another">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Inscrire un autre membre</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- MODAL MODE HÔTE SÉCURISÉ (ACCESSIBLE VIA LES 3 POINTS)            -->
+  <!-- ================================================================= -->
+  <div class="modal-overlay" id="host-modal" hidden>
+    <div class="modal-card">
+      <div class="modal-card-inner">
+        <button type="button" class="btn-close-modal" id="btn-close-host" aria-label="Fermer">✕</button>
+
+        <!-- ÉCRAN 1 : SAISIE DU MOT DE PASSE -->
+        <div id="host-auth-screen" class="host-screen">
+          <div class="auth-icon-wrap">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h3 class="auth-title">Accès Mode Hôte</h3>
+          <p class="auth-subtitle">Entrez le mot de passe organisateur pour gérer les inscriptions et extraire la base Excel.</p>
+
+          <form id="host-auth-form" autocomplete="off">
+            <div class="input-wrap auth-input-wrap">
+              <input type="password" id="host-password-input" class="password-field" placeholder="Entrez le mot de passe hôte..." autocomplete="current-password" required>
+              <button type="button" class="btn-toggle-pwd" id="btn-toggle-pwd" aria-label="Afficher/masquer mot de passe" title="Afficher/masquer le mot de passe">
+                <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <p id="auth-error-msg" class="auth-error-msg" hidden>Mot de passe incorrect. Réessayez.</p>
+            <button type="submit" class="btn-unlock-host" id="btn-unlock-host">
+              <span>Accéder au Mode Hôte</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </form>
+          <p class="auth-hint">Accès strictement réservé à l'équipe organisatrice</p>
+        </div>
+
+        <!-- ÉCRAN 2 : TABLEAU DE BORD HÔTE DÉVERROUILLÉ -->
+        <div id="host-dash-screen" class="host-screen" hidden>
+          <div class="host-dash-header">
+            <div>
+              <span class="auth-badge">ACCÈS AUTORISÉ</span>
+              <h3 class="dash-title">Gestion & Extractions</h3>
+            </div>
+            <div class="host-header-actions">
+              <button type="button" class="btn-refresh-host" id="btn-refresh-host" title="Rafraîchir les données et la liste">
+                <svg class="refresh-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+                <span>Rafraîchir</span>
+              </button>
+              <button type="button" class="btn-lock-session" id="btn-lock-session" title="Verrouiller la session">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>Verrouiller</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Configuration du Registrar Actif -->
+          <div class="host-config-panel">
+            <label for="host-name-input" class="config-label">Nom de l'Enregistreur / Registrar actif</label>
+            <div class="host-input-wrap">
+              <div class="input-wrap flex-input">
+                <input id="host-name-input" type="text" placeholder="ex: djo_1111" autocomplete="off">
+                <span class="field-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+              </div>
+              <span class="saved-indicator" id="host-saved-indicator">✓ Enregistré</span>
+            </div>
+            <p class="host-help-text">
+              <span class="pulse-dot"></span>
+              Chaque badge créé sera automatiquement enregistré sous ce nom dans la colonne <strong>Registrar</strong> d'Excel.
+            </p>
+          </div>
+
+          <!-- Statistiques en direct -->
+          <div class="host-stats-container">
+            <div class="stat-box">
+              <span class="stat-number" id="stat-total-count">0</span>
+              <span class="stat-caption">Total inscrits Excel</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number" id="stat-session-count">0</span>
+              <span class="stat-caption">Inscrits cette session</span>
+            </div>
+          </div>
+
+          <!-- Téléchargement / Extraction Excel -->
+          <a href="/api/database/download" class="btn-download-excel" id="btn-download-excel" download>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Extraire la base Excel (badges_database.xlsx)</span>
+          </a>
+
+          <!-- Registre de toutes les inscriptions avec recherche -->
+          <div class="members-registry">
+            <div class="registry-header">
+              <h4>Toutes les inscriptions</h4>
+              <div class="registry-controls">
+                <div class="search-wrap">
+                  <input type="text" id="member-search" placeholder="Rechercher nom, département..." autocomplete="off">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <button type="button" class="btn-icon-refresh" id="btn-icon-refresh" title="Rafraîchir la liste">
+                  <svg class="refresh-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="recent-list" id="recent-members-list">
+              <div class="loading-state">Chargement des inscriptions...</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
